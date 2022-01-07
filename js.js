@@ -1,5 +1,7 @@
+
 //Keyboar controls
 (()=>{
+    lowLag.init()
     //Parts controller
     let audio_sources = [0,0,0,0,0,0,0,0,0]
 
@@ -21,7 +23,10 @@
             //console.log("Loading:",drum_part_type,load_resource(Parts[drum_part_type].default.source))
             let res = JSON.parse(load_resource(Parts[drum_part_type].default.source))
             audio_sources[count] = res
-            count+=1
+            if(res.audio) {
+                lowLag.load([res.audio.data],drum_part_type);
+                count+=1
+            }
         }
     }
 
@@ -53,7 +58,8 @@
             img_view.src         =  Parts[name][part_option].img_url
             let res = JSON.parse(load_resource(Parts[name][part_option].source))
             selected_part[name] += 1
-            audio_sources[parseInt(id)] = res
+
+            lowLag.load([res.audio.data],name);
         })
     }
 
@@ -71,7 +77,7 @@
             let res = JSON.parse(load_resource(Parts[name][part_option].source))
 
             selected_part[name] -= 1
-            audio_sources[parseInt(id)] = res
+            lowLag.load([res.audio.data],name);
         })
     }
 
@@ -97,9 +103,7 @@
     remap_buttons()
 
     function key_act(event) {
-        let id = parseInt(buttons_map[event.key].getAttribute("data-id"))
-        let str = audio_sources[id].audio.data;
-        new Audio(str).play()
+        lowLag.play(buttons_map[event.key].classList.item(1))
     }
 
 
@@ -109,14 +113,13 @@
             let key = target.querySelector(".key")
             let ant_key      = key.textContent.toLowerCase()
             let key_input    = prompt("Change Key "+ key.textContent +" to")
+
+            if(key_input.toLowerCase() == ant_key)
+                return
+
             buttons_map[key_input.toLowerCase()] = buttons_map[key.textContent.toLowerCase()]
             key.textContent = key_input.toUpperCase()
-            buttons_map[ant_key] = undefined
+            delete buttons_map[ant_key]
         })
     }
-
-    function add_buttons_event() {
-
-    }
-    
 })()
