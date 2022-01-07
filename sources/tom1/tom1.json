@@ -1,0 +1,6 @@
+{
+  "audio": {
+    "mime": "audio/mpeg",
+    "data": "sources/tom1/tom1.mp3"
+  }
+}

@@ -18,7 +18,7 @@
             let drum_part_type = part.classList.item(1)
             let img_view       = part.querySelector(".selected_img")
             img_view.src       =  Parts[drum_part_type].default.img_url
-            //console.log("Loading:",drum_part_type,load_resource(Parts[drum_part_type].default.source))
+            console.log("Loading:",drum_part_type,load_resource(Parts[drum_part_type].default.source))
             let res = JSON.parse(load_resource(Parts[drum_part_type].default.source))
             audio_sources[count] = res
             count+=1
@@ -98,6 +98,7 @@
 
     function key_act(event) {
         let id = parseInt(buttons_map[event.key].getAttribute("data-id"))
+        console.log(audio_sources[id].audio)
         let str = audio_sources[id].audio.data;
         new Audio(str).play()
     }

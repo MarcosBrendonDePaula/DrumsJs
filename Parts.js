@@ -23,47 +23,52 @@ const Parts = {
             'img_url' : "sources/hithat/hithat1.png",
             'source'  : "sources/hithat/hithat1.json",
             'size'    : "",
+        },
+        "hithat2":{
+            'img_url' : "sources/hithat/hithat2.png",
+            'source'  : "sources/hithat/hithat2.json",
+            'size'    : "",
         }
     },
     "ride": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
-            'size'    : "",
+            'img_url' : "sources/ride/ride1.png",
+            'source'  : "sources/ride/ride1.json",
+            'size'    : "9",
         }
     },
     "crash": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
-            'size'    : "",
+            'img_url' : "sources/crash/crash1.png",
+            'source'  : "sources/crash/crash1.json",
+            'size'    : "9",
         }
     },
     "tom1": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
+            'img_url' : "sources/tom1/tom1.png",
+            'source'  : "sources/tom1/tom1.json",
             'size'    : "",
         }
     },
     "tom2": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
+            'img_url' : "sources/tom2/tom1.png",
+            'source'  : "sources/tom2/tom1.json",
             'size'    : "",
         }
     },
     "tom3": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
+            'img_url' : "sources/tom3/tom1.png",
+            'source'  : "sources/tom3/tom1.json",
             'size'    : "",
         }
     },
     "tom4": {
         "default":{
-            'img_url' : "",
-            'source'  : "none.json",
+            'img_url' : "sources/tom4/tom1.png",
+            'source'  : "sources/tom4/tom1.json",
             'size'    : "",
         }
     }
