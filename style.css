@@ -1,0 +1,108 @@
+html,body {
+    width: 100vw;
+    height: 100vh;
+}
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.drums_view {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+
+
+.drum_part {
+    margin: 20px;
+    position: relative;
+    width: 30%;
+    height: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.d_none {
+    display: none;
+}
+
+.source_loading {
+    width: 60%;
+    height: 10%;
+    position: absolute;
+    left: 15%;
+    top: 40%;
+    border: 2px solid crimson;
+    border-radius: 8px;
+}
+
+.progress_bar {
+    width: 0%;
+    height: 100%;
+    background-color: chartreuse;
+    border-radius: 8px;
+}
+
+.selected_img_view {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 50%;
+    height: 100%;
+}
+
+.selected_img{
+    width: 100%;
+    height: 100%;
+}
+
+.action_buttons {
+    position: relative;
+    bottom: 100%;
+    left: 80%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 50%;
+
+}
+
+.drum_act_btn, .drum_act_btn img{
+    width: 100%;
+    height: 100%;
+
+}
+.drum_act_btn {
+    border: 1px solid cadetblue;
+    border-radius: 20px;
+}
+
+.drum_act_btn:hover{
+    background-color: chartreuse;
+}
+
+.down_btn {
+    transform: rotate(180deg);
+}
+
+.key_view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    border: 1px solid cadetblue;
+    width: 10%;
+    height: 20%;
+    border-radius: 10px;
+}
+
+.key_view:hover {
+    background-color: cadetblue;
+}

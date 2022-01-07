@@ -1,0 +1,6 @@
+{
+  "audio": {
+    "mime": "audio/mpeg",
+    "data": "sources/kick/kick.mp3"
+  }
+}
