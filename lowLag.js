@@ -243,18 +243,23 @@ this.audioContextPendingRequest = {};
 		}
 	}
 
-	this.playSoundAudioContext= function(tag){
+	this.playSoundAudioContext = async function(tag){
 		lowLag.msg("playSoundAudioContext "+tag);
 		var buffer = lowLag.audioBuffers[tag];
 		if(buffer == undefined) { //possibly not loaded; put in a request to play onload
 			lowLag.audioContextPendingRequest[tag] = true;
 			return;
 		}
+
 		var context = lowLag.audioContext;
+
 		if (this.useSuspension && this.suspended) {
 			this.resumePlaybackAudioContext(); // Resume playback
 		}
+
 		var source = context.createBufferSource(); // creates a sound source
+
+
 		source.buffer = buffer;                    // tell the source which sound to play
 		source.connect(context.destination);       // connect the source to the context's destination (the speakers)
 		if (typeof(source.noteOn) == "function") {

@@ -13,8 +13,26 @@
     <script src="js.js" defer></script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
 </head>
 <body>
+    <nav class="nav_bar">
+        <div class="menu menu_closed">
+            <!--MetronomeButton -->
+            <div class="button metronome_switch">
+                <img src="images/metronome.svg">
+                <span>Metronome</span>
+            </div>
+            <!--FeedbackButton -->
+            <div class="button feedback_switch">
+                <img src="images/feedback.png">
+                <span>FeedBack</span>
+            </div>
+        </div>
+        <div class="open_menu_btn down_btn">
+            <img src="images/Up_arrow.svg">
+        </div>
+    </nav>
     <div class="container">
         <div class="drums_view">
             <div class="drum_part snare">
@@ -197,7 +215,83 @@
                     <span class="key">4</span>
                 </div>
             </div>
+            <div class="drum_part ride2">
+                <div class="selected_img_view">
+                    <img class="selected_img">
+                </div>
+                <div class="source_loading d_none">
+                    <div class="progress_bar">
+                    </div>
+                </div>
+                <div class="action_buttons">
+                    <div class="drum_act_btn up_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                    <div class="drum_act_btn down_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                </div>
+                <div class="key_view">
+                    <span class="key">5</span>
+                </div>
+            </div>
+            <div class="drum_part ride3">
+                <div class="selected_img_view">
+                    <img class="selected_img">
+                </div>
+                <div class="source_loading d_none">
+                    <div class="progress_bar">
+                    </div>
+                </div>
+                <div class="action_buttons">
+                    <div class="drum_act_btn up_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                    <div class="drum_act_btn down_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                </div>
+                <div class="key_view">
+                    <span class="key">6</span>
+                </div>
+            </div>
+            <div class="drum_part ride4">
+                <div class="selected_img_view">
+                    <img class="selected_img">
+                </div>
+                <div class="source_loading d_none">
+                    <div class="progress_bar">
+                    </div>
+                </div>
+                <div class="action_buttons">
+                    <div class="drum_act_btn up_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                    <div class="drum_act_btn down_btn">
+                        <img src="images/Up_arrow.svg">
+                    </div>
+                </div>
+                <div class="key_view">
+                    <span class="key">7</span>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="metronome_view d_none">
+        <div class="field input_field">
+            <span>BPM: </span>
+            <input type="number" class="bpm_input">
+        </div>
+        <div class="field metronome_menu">
+            <button id="metronome_start">Start</button>
+            <button id="metronome_stop">Stop</button>
+        </div>
+        <div class="close_btn">
+            <img src="images/close.svg">
+        </div>
+    </div>
+    <div class="feedback_view d_none">
+
     </div>
 </body>
 </html>
