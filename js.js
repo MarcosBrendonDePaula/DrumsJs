@@ -1,8 +1,12 @@
 lowLag.init();
+let audio_volumes = [1,1,1,1,1,1,1,1,1];
+let g_debug = 0;
 //Keyboar controls
 (()=>{
     //Parts controller
+    let audio_geral   = 1
     let audio_sources = [0,0,0,0,0,0,0,0,0]
+
 
     function load_resource(file,callback) {
         let req = new XMLHttpRequest();
@@ -38,6 +42,8 @@ lowLag.init();
     let enum_parts = {
 
     }
+
+    let enum_positions = {}
 
     for (let Part in Parts) {
         selected_part[Part] = 0
@@ -91,10 +97,13 @@ lowLag.init();
     function remap_buttons() {
         let parts = document.querySelectorAll(".drum_part")
 
+        enum_positions = {}
+
         let id_count = 0
         for(let part of parts) {
             let key = part.querySelector(".key").textContent
             buttons_map[key.toLowerCase()] = part
+            enum_positions[part.classList.item(1)] = id_count
             part.setAttribute('data-id',id_count+"")
             id_count+=1
         }
@@ -104,10 +113,13 @@ lowLag.init();
     remap_buttons()
 
     function key_act(event) {
-        lowLag.play(buttons_map[event.key].classList.item(1))
+
+        let part = buttons_map[event.key].classList.item(1)
+        console.log(audio_volumes[enum_positions[part]])
+        lowLag.play(part,audio_volumes[enum_positions[part]])
     }
 
-
+    console.log(enum_parts)
     for(let key_view of document.querySelectorAll(".key_view")) {
         key_view.addEventListener('click',(event)=>{
             let target = event.currentTarget
@@ -156,7 +168,9 @@ lowLag.init();
     })
 
 })();
+var lastRender = 0;
 
+var mili_second = 60000;
 //Metronome Controller
 (()=>{
 
@@ -168,6 +182,9 @@ lowLag.init();
 
     const bpm_input           = document.querySelector(".bpm_input")
 
+    const minus_btn              = document.querySelector(".minus_btn")
+    const more_btn                = document.querySelector(".more_btn")
+
     close_btn.addEventListener("click",()=>{
         metronome_view.classList.toggle("d_none")
     })
@@ -176,17 +193,38 @@ lowLag.init();
 
         if (Vars.playing)
             return
-
         Vars.playing = true
-        setTimeout(loop,(60000/Vars.bpm))
+
+
+        Vars.anim_frame = window.requestAnimationFrame(loop)
     })
 
     metronome_stop_btn.addEventListener("click",()=>{
         Vars.playing = false
+        window.cancelAnimationFrame(Vars.anim_frame);
     })
 
-    bpm_input.addEventListener("change",()=>{
+    bpm_input.addEventListener("click",()=>{
+        document.querySelector(".bpm_view").textContent = bpm_input.value+" BPM"
         Vars.bpm = parseInt(bpm_input.value)
+        Vars.step_time = (60000/Vars.bpm)
+    })
+
+    minus_btn.addEventListener("click",()=>{
+        if(parseInt(bpm_input.value) == 0)
+            return
+        bpm_input.value -= 1;
+        document.querySelector(".bpm_view").textContent = bpm_input.value+" BPM"
+        Vars.bpm = bpm_input.value
+        Vars.step_time = (60000/Vars.bpm)
+    })
+    more_btn.addEventListener("click",()=>{
+        if(parseInt(bpm_input.value) == 500)
+            return
+        bpm_input.value = parseInt(bpm_input.value)+1;
+        document.querySelector(".bpm_view").textContent = bpm_input.value+" BPM"
+        Vars.bpm = bpm_input.value
+        Vars.step_time = (60000/Vars.bpm)
     })
 
     lowLag.load("sources/metronome_sound.wav","metronome_sound");
@@ -199,22 +237,22 @@ lowLag.init();
         volume  : 0,
         lastTick: 0,
         proxTick: 0,
-        delay   : 0
+        delay   : 0,
+        step_time: 60000/60,
+        anim_frame:0
     }
 
-    const loop = ()=>{
-        if(!Vars.playing) {
-            return
+    function loop(timestamp) {
+        Vars.anim_frame = window.requestAnimationFrame(loop)
+        if(timestamp >= Vars.proxTick){
+            lowLag.play("metronome_sound")
+            Vars.proxTick = timestamp + Vars.step_time
+            Vars.lastTick = timestamp
         }
-        let actual_time_tick = new Date().getMilliseconds()
-        Vars.delay = Vars.proxTick - actual_time_tick
-        lowLag.play("metronome_sound")
-        Vars.proxTick = actual_time_tick+(60000/Vars.bpm)
-        Vars.lastTick = actual_time_tick
-
-        setTimeout(loop,(60000/Vars.bpm))
-        console.log(Vars.delay)
     }
-    //setTimeout(loop,60000/Vars.bpm)
 
-})()
+
+
+    lowLag.debug = undefined
+})();
+

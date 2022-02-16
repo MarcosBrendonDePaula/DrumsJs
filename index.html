@@ -278,9 +278,17 @@
         </div>
     </div>
     <div class="metronome_view d_none">
+        <div class="field">
+            <button class="minus_btn">
+                -
+            </button>
+            <span class="bpm_view">60 BPM </span>
+            <button class="more_btn">
+                +
+            </button>
+        </div>
         <div class="field input_field">
-            <span>BPM: </span>
-            <input type="number" class="bpm_input">
+            <input type="range" value="60" min="0" max="500" class="bpm_input">
         </div>
         <div class="field metronome_menu">
             <button id="metronome_start">Start</button>
@@ -291,7 +299,15 @@
         </div>
     </div>
     <div class="feedback_view d_none">
-
+        <form>
+            <div class="form_field">
+                <label>FeedBack</label>
+                <textarea>Escreva seu feedback</textarea>
+            </div>
+            <div class="form_field">
+                <button>Enviar</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>

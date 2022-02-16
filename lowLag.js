@@ -253,12 +253,12 @@ this.audioContextPendingRequest = {};
 
 		var context = lowLag.audioContext;
 
+
 		if (this.useSuspension && this.suspended) {
 			this.resumePlaybackAudioContext(); // Resume playback
 		}
 
 		var source = context.createBufferSource(); // creates a sound source
-
 
 		source.buffer = buffer;                    // tell the source which sound to play
 		source.connect(context.destination);       // connect the source to the context's destination (the speakers)
