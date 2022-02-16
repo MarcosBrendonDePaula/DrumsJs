@@ -227,31 +227,31 @@ var mili_second = 60000;
         Vars.step_time = (60000/Vars.bpm)
     })
 
-    lowLag.load("sources/metronome_sound.wav","metronome_sound");
-
+    lowLag.load("sources/m0.wav","ms0");
+    lowLag.load("sources/m1.wav","ms1");
 
 
     const Vars = {
-        playing : false,
-        bpm     : 60,
-        volume  : 0,
-        lastTick: 0,
-        proxTick: 0,
-        delay   : 0,
-        step_time: 60000/60,
-        anim_frame:0
+        playing     : false,
+        bpm         : 60,
+        volume      : 0,
+        lastTick    : 0,
+        proxTick    : 0,
+        delay       : 0,
+        step_time   : 60000/60,
+        anim_frame  : 0,
+        sound_times : ["ms0","ms1"],
+        actual_time : 0
     }
 
     function loop(timestamp) {
         Vars.anim_frame = window.requestAnimationFrame(loop)
         if(timestamp >= Vars.proxTick){
-            lowLag.play("metronome_sound")
-            Vars.proxTick = timestamp + Vars.step_time
+            lowLag.play(Vars.sound_times[0])
+            Vars.proxTick = (timestamp + Vars.step_time) - (timestamp - Vars.proxTick)
             Vars.lastTick = timestamp
         }
     }
-
-
 
     lowLag.debug = undefined
 })();
